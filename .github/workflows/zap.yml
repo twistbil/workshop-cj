@@ -10,9 +10,10 @@ jobs:
     steps: 
       - uses: actions/checkout@v2
       - name: Build Image
-        run: docker build --tag stackhawk/nodeexpressvulny .
-      - name: Run Docker Container
-        run: docker run --rm --publish 3000:3000 --name nodeexpressvulny stackhawk/nodeexpressvulny
+        run: |
+          npm install
+          node bootstrapdb.js
+          DEBUG=myapp:* npm start
       - name: ZAP Scan
         uses: zaproxy/action-full-scan@v0.4.0
         with:
