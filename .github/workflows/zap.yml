@@ -9,8 +9,6 @@ jobs:
     runs-on: ubuntu-18.04
     steps: 
       - uses: actions/checkout@v2
-      - name: Build Image
-        run: docker build --tag stackhawk/nodeexpressvulny .
       - name: docker compose
         run: docker-compose up --build --detach
       - name: ZAP Scan
